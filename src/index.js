@@ -42,12 +42,18 @@ function handleMovieClick(movie) {
 function handleBuyTicket(e) {
     const ticketDiv = document.querySelector("#ticket-num");
     const tickets = ticketDiv.textContent.split(" ")[0];
-    if (tickets > 0) {
+    if (tickets > 1) {
         ticketDiv.textContent = tickets - 1 + " remaining tickets";
     }
-    else if (tickets == 0) {
-        alert("No more tickets!");
-        e.target.classList.add("sold-out");
-        e.target.classList.remove("orange");
+    else if (tickets == 1) {
+        ticketDiv.textContent = tickets - 1 + " remaining tickets";
+        e.target.textContent = "Sold Out";
+        const movieTitle = document.querySelector("#title").innerText;
+        const movieList = document.querySelector("#films").children;
+        for (let movie of movieList) {  
+            if (movie.childNodes['0'].textContent == movieTitle) {
+                movie.classList.add("sold-out");
+            }
+        };
     }
 }
